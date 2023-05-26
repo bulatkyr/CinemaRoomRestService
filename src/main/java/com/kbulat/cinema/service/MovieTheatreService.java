@@ -2,6 +2,7 @@ package com.kbulat.cinema.service;
 
 import com.kbulat.cinema.model.MovieTheatre;
 import com.kbulat.cinema.model.Seat;
+import com.kbulat.cinema.model.Statistic;
 import com.kbulat.cinema.model.Ticket;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,13 @@ public class MovieTheatreService {
         movieTheatre.getAvailableSeats().add(ticket.getSeat());
         movieTheatre.getTickets().remove(ticket);
         return ticket;
+    }
+
+    public Statistic getStatistic() {
+        int income = movieTheatre.getTickets().stream()
+                .mapToInt(t -> t.getSeat().getPrice())
+                .sum();
+        return new Statistic(income, movieTheatre.getAvailableSeats().size(), movieTheatre.getUnavailableSeats().size());
     }
 
 }
