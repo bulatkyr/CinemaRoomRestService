@@ -1,10 +1,8 @@
 package com.kbulat.cinema.controller;
 
-import com.kbulat.cinema.dto.ErrorResponse;
-import com.kbulat.cinema.dto.PurchaseTicketRequest;
-import com.kbulat.cinema.dto.ReturnTicketRequest;
-import com.kbulat.cinema.dto.ReturnTicketResponse;
+import com.kbulat.cinema.dto.*;
 import com.kbulat.cinema.model.MovieTheatre;
+import com.kbulat.cinema.model.Ticket;
 import com.kbulat.cinema.service.MovieTheatreService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +24,8 @@ public class MovieTheatreController {
     @PostMapping("/purchase")
     public ResponseEntity<?> purchaseTicket(@RequestBody PurchaseTicketRequest req) {
         try {
-            return ResponseEntity.ok(movieTheatreService.purchaseTicket(req.getRow(), req.getColumn()));
+            Ticket ticket = movieTheatreService.purchaseTicket(req.getRow(), req.getColumn());
+            return ResponseEntity.ok(new PurchaseTicketResponse(ticket.getToken(), ticket.getSeat()));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body(new ErrorResponse(ex.getMessage()));
         }
@@ -36,7 +35,8 @@ public class MovieTheatreController {
     @PostMapping("/return")
     public ResponseEntity<?> returnTicket(@RequestBody ReturnTicketRequest request) {
         try {
-            return ResponseEntity.ok(new ReturnTicketResponse(movieTheatreService.returnSeat(request.getToken())));
+            Ticket returnTicket = movieTheatreService.returnTicket(request.getToken());
+            return ResponseEntity.ok(new ReturnTicketResponse(returnTicket.getSeat()));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body(new ErrorResponse(ex.getMessage()));
         }

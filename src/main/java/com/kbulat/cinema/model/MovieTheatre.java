@@ -26,7 +26,7 @@ public class MovieTheatre {
     private List<Seat> unavailableSeats;
 
     @JsonIgnore
-    private Map<String, Seat> tokenSeatMap;
+    private List<Ticket> tickets;
 
     public MovieTheatre() {
         this.totalRows = ROW_COUNT;
@@ -38,7 +38,7 @@ public class MovieTheatre {
             }
         }
         this.unavailableSeats = new ArrayList<>();
-        this.tokenSeatMap = new HashMap<>();
+        this.tickets = new ArrayList<>();
     }
 
     public List<Seat> getAvailableSeats() {
@@ -57,8 +57,9 @@ public class MovieTheatre {
         return unavailableSeats;
     }
 
-    public Map<String, Seat> getTokenSeatMap() {
-        return tokenSeatMap;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 }
+
 
