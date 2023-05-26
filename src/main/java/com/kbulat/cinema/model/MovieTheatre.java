@@ -1,5 +1,6 @@
 package com.kbulat.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class MovieTheatre {
     @JsonProperty("available_seats")
     private List<Seat> availableSeats;
 
+    @JsonIgnore
+    private List<Seat> unavailableSeats;
+
     public MovieTheatre() {
         this.totalRows = ROW_COUNT;
         this.totalColumns = COLUMN_COUNT;
@@ -28,6 +32,7 @@ public class MovieTheatre {
                 this.availableSeats.add(new Seat(i + 1, j + 1));
             }
         }
+        this.unavailableSeats = new ArrayList<>();
     }
 
     public List<Seat> getAvailableSeats() {
@@ -40,5 +45,9 @@ public class MovieTheatre {
 
     public int getTotalColumns() {
         return totalColumns;
+    }
+
+    public List<Seat> getUnavailableSeats() {
+        return unavailableSeats;
     }
 }
