@@ -2,10 +2,10 @@ package com.kbulat.cinema.model;
 
 public class Seat {
 
-    private int row;
-    private int column;
+    private final int row;
+    private final int column;
 
-    private int price;
+    private final int price;
 
     public Seat(int row, int column) {
         this.row = row;
@@ -25,16 +25,8 @@ public class Seat {
         return row;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public int getColumn() {
         return column;
-    }
-
-    public void setColumn(int column) {
-        this.column = column;
     }
 
     public int getPrice() {

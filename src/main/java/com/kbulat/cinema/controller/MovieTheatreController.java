@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MovieTheatreController {
 
+    private static final String PASSWORD = "super_secret";
     private final MovieTheatreService movieTheatreService;
 
     public MovieTheatreController(MovieTheatreService movieTheatreService) {
@@ -45,7 +46,7 @@ public class MovieTheatreController {
 
     @PostMapping("/stats")
     public ResponseEntity<?> showStatistics(@RequestParam(required = false) String password) {
-        if (!"super_secret".equals(password)) {
+        if (!PASSWORD.equals(password)) {
             return new ResponseEntity<>(new ErrorResponse("The password is wrong!"), HttpStatus.UNAUTHORIZED);
         }
         return ResponseEntity.ok(movieTheatreService.getStatistic());

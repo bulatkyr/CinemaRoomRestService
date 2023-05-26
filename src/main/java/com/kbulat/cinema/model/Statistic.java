@@ -5,17 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Statistic {
 
     @JsonProperty("current_income")
-    private int currentIncome;
+    private final int currentIncome;
 
     @JsonProperty("number_of_available_seats")
-    private int availableSeatsCount;
+    private final int availableSeatsCount;
 
     @JsonProperty("number_of_purchased_tickets")
-    private int purchasedTicketCount;
-
-    public Statistic() {
-    }
-
+    private final int purchasedTicketCount;
 
     public Statistic(int currentIncome, int availableSeatsCount, int purchasedTicketCount) {
         this.currentIncome = currentIncome;

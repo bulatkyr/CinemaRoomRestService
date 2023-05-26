@@ -2,7 +2,7 @@ package com.kbulat.cinema.dto;
 
 public class ErrorResponse {
 
-    private String error;
+    private final String error;
 
     public ErrorResponse(String error) {
         this.error = error;

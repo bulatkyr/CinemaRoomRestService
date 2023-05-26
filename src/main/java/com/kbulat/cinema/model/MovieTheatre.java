@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MovieTheatre {
 
@@ -14,19 +12,19 @@ public class MovieTheatre {
     private static final int COLUMN_COUNT = 9;
 
     @JsonProperty("total_rows")
-    private int totalRows;
+    private final int totalRows;
 
     @JsonProperty("total_columns")
-    private int totalColumns;
+    private final int totalColumns;
 
     @JsonProperty("available_seats")
-    private List<Seat> availableSeats;
+    private final List<Seat> availableSeats;
 
     @JsonIgnore
-    private List<Seat> unavailableSeats;
+    private final List<Seat> unavailableSeats;
 
     @JsonIgnore
-    private List<Ticket> tickets;
+    private final List<Ticket> tickets;
 
     public MovieTheatre() {
         this.totalRows = ROW_COUNT;

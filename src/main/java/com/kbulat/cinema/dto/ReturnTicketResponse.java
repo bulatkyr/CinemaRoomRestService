@@ -6,10 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ReturnTicketResponse {
 
     @JsonProperty("returned_ticket")
-    private Seat returnedSeat;
+    private final Seat returnedSeat;
 
-    public ReturnTicketResponse() {
-    }
 
     public ReturnTicketResponse(Seat returnedSeat) {
         this.returnedSeat = returnedSeat;
@@ -19,7 +17,4 @@ public class ReturnTicketResponse {
         return returnedSeat;
     }
 
-    public void setReturnedSeat(Seat returnedSeat) {
-        this.returnedSeat = returnedSeat;
-    }
 }
