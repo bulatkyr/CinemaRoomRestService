@@ -1,10 +1,10 @@
 package com.kbulat.cinema.dto;
 
-public class PurchaseTicketErrorResponse {
+public class ErrorResponse {
 
     private String error;
 
-    public PurchaseTicketErrorResponse(String error) {
+    public ErrorResponse(String error) {
         this.error = error;
     }
 

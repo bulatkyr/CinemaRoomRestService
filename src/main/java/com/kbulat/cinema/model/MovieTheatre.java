@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MovieTheatre {
 
@@ -23,6 +25,9 @@ public class MovieTheatre {
     @JsonIgnore
     private List<Seat> unavailableSeats;
 
+    @JsonIgnore
+    private Map<String, Seat> tokenSeatMap;
+
     public MovieTheatre() {
         this.totalRows = ROW_COUNT;
         this.totalColumns = COLUMN_COUNT;
@@ -33,6 +38,7 @@ public class MovieTheatre {
             }
         }
         this.unavailableSeats = new ArrayList<>();
+        this.tokenSeatMap = new HashMap<>();
     }
 
     public List<Seat> getAvailableSeats() {
@@ -50,4 +56,9 @@ public class MovieTheatre {
     public List<Seat> getUnavailableSeats() {
         return unavailableSeats;
     }
+
+    public Map<String, Seat> getTokenSeatMap() {
+        return tokenSeatMap;
+    }
 }
+

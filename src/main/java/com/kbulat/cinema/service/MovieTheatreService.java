@@ -1,8 +1,11 @@
 package com.kbulat.cinema.service;
 
+import com.kbulat.cinema.dto.PurchaseTicketResponse;
 import com.kbulat.cinema.model.MovieTheatre;
 import com.kbulat.cinema.model.Seat;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class MovieTheatreService {
@@ -17,7 +20,7 @@ public class MovieTheatreService {
         return movieTheatre;
     }
 
-    public Seat purchaseTicket(int row, int column) throws Exception {
+    public PurchaseTicketResponse purchaseTicket(int row, int column) throws Exception {
         if (row > 9 || row < 1 || column < 1 || column > 9) {
             throw new Exception("The number of a row or a column is out of bounds!");
         }
@@ -25,10 +28,26 @@ public class MovieTheatreService {
             if (seat.getRow() == row && seat.getColumn() == column) {
                 movieTheatre.getAvailableSeats().remove(seat);
                 movieTheatre.getUnavailableSeats().add(seat);
-                return seat;
+                String token = UUID.randomUUID().toString();
+                movieTheatre.getTokenSeatMap().put(token, seat);
+                return new PurchaseTicketResponse(token, seat);
             }
         }
         throw new Exception("The ticket has been already purchased!");
+    }
+
+    public Seat returnSeat(String token) throws Exception {
+        if (token == null || token.isBlank()) {
+            throw new Exception("Wrong token!");
+        }
+        Seat seat = movieTheatre.getTokenSeatMap().get(token);
+        if (seat == null) {
+            throw new Exception("Wrong token!");
+        }
+        movieTheatre.getUnavailableSeats().remove(seat);
+        movieTheatre.getAvailableSeats().add(seat);
+        movieTheatre.getTokenSeatMap().remove(token);
+        return seat;
     }
 
 }
